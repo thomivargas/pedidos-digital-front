@@ -34,6 +34,7 @@ import {
 
 const schema = z.object({
   nombre: z.string().min(2, 'El nombre debe tener al menos 2 caracteres'),
+  usuario: z.string().min(2, 'El usuario debe tener al menos 2 caracteres'),
   correo: z.string().email('Ingresá un correo válido'),
   contrasena: z.string().min(8, 'La contraseña debe tener al menos 8 caracteres'),
   rol: z.enum(['VENDEDOR', 'ADMIN']),
@@ -51,7 +52,7 @@ export function NuevoUsuarioModal({ open, onOpenChange }: Props) {
 
   const form = useForm<FormValues>({
     resolver: zodResolver(schema),
-    defaultValues: { nombre: '', correo: '', contrasena: '', rol: 'VENDEDOR' },
+    defaultValues: { nombre: '', usuario: '', correo: '', contrasena: '', rol: 'VENDEDOR' },
   })
 
   const { mutate, isPending } = useMutation({
@@ -94,6 +95,20 @@ export function NuevoUsuarioModal({ open, onOpenChange }: Props) {
                   <FormLabel>Nombre completo</FormLabel>
                   <FormControl>
                     <Input placeholder="Juan Pérez" {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            <FormField
+              control={form.control}
+              name="usuario"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Usuario</FormLabel>
+                  <FormControl>
+                    <Input placeholder="juanperez" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>

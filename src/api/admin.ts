@@ -3,6 +3,7 @@ import type { Pedido, VendedorConConteo, Sucursal, PaginatedResponse, EstadoPedi
 
 export interface CrearUsuarioDto {
   nombre: string
+  usuario: string
   correo: string
   contrasena: string
   rol: Rol
