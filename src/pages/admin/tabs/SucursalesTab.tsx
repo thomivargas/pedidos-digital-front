@@ -19,7 +19,7 @@ import {
   TableRow,
 } from '@/components/ui/table'
 
-const LIMIT = 10
+const LIMIT = 8
 
 export function SucursalesTab() {
   const [page, setPage] = useState(1)

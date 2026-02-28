@@ -26,7 +26,7 @@ import {
   SelectValue,
 } from '@/components/ui/select'
 
-const LIMIT = 10
+const LIMIT = 8
 const ALL = 'all'
 
 export function PedidosTab() {
@@ -134,6 +134,9 @@ export function PedidosTab() {
                 Cotización
               </TableHead>
               <TableHead className="w-32 text-table-header-text text-xs font-semibold uppercase tracking-wider p-3.5">
+                Pago
+              </TableHead>
+              <TableHead className="w-32 text-table-header-text text-xs font-semibold uppercase tracking-wider p-3.5">
                 Estado
               </TableHead>
               <TableHead className="w-36 text-table-header-text text-xs font-semibold uppercase tracking-wider p-3.5">
@@ -148,7 +151,7 @@ export function PedidosTab() {
             {loadingPedidos ? (
               Array.from({ length: 5 }).map((_, i) => (
                 <TableRow key={i} className="border-b border-border/50">
-                  {Array.from({ length: 8 }).map((__, j) => (
+                  {Array.from({ length: 9 }).map((__, j) => (
                     <TableCell key={j} className="py-4 px-5">
                       <Skeleton className="h-4 w-full rounded-md" />
                     </TableCell>
@@ -157,7 +160,7 @@ export function PedidosTab() {
               ))
             ) : pedidos.length === 0 ? (
               <TableRow>
-                <TableCell colSpan={8} className="py-20 text-center text-muted-foreground text-sm">
+                <TableCell colSpan={9} className="py-20 text-center text-muted-foreground text-sm">
                   No se encontraron pedidos
                 </TableCell>
               </TableRow>
@@ -197,6 +200,20 @@ export function PedidosTab() {
                     <span className="text-sm tabular-nums text-muted-foreground">
                       ${Number(p.cotizacionDolar).toLocaleString("es-AR", { minimumFractionDigits: 2 })}
                     </span>
+                  </TableCell>
+                  <TableCell className="p-3.5">
+                    <div className="text-xs">
+                      {p.metodoPago === 'TARJETA' && p.planPago
+                        ? `${p.planPago.marca} ${p.planPago.cuotas}c`
+                        : p.metodoPago === 'TRANSFERENCIA'
+                          ? 'Transf.'
+                          : 'Efectivo'}
+                    </div>
+                    {p.permutaModelo && (
+                      <div className="text-xs text-muted-foreground">
+                        + {p.permutaModelo} (${Number(p.permutaValorUsd ?? 0).toFixed(0)})
+                      </div>
+                    )}
                   </TableCell>
                   <TableCell className="p-3.5">
                     <EstadoBadge estado={p.estado} />

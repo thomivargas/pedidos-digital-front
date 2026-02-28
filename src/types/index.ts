@@ -2,11 +2,36 @@ export type Rol = 'ADMIN' | 'VENDEDOR'
 
 export type EstadoPedido = 'PENDIENTE' | 'ENVIADO_A_CAJA' | 'COMPLETADO'
 
+export type MetodoPago = 'EFECTIVO' | 'TRANSFERENCIA' | 'TARJETA'
+
 export interface AuthUser {
   id: string
   nombre: string
   correo: string
   rol: Rol
+}
+
+export interface PlanPago {
+  id: string
+  marca: string
+  cuotas: number
+  interesPct: string
+  ivaPct: string
+  activo: boolean
+  creadoEn: string
+  actualizadoEn: string
+}
+
+export interface CelularPermuta {
+  id: string
+  nombre: string
+  modelo: string
+  bateriaMin: number
+  bateriaMax: number
+  precioUsd: string
+  activo: boolean
+  creadoEn: string
+  actualizadoEn: string
 }
 
 export interface Pedido {
@@ -16,6 +41,13 @@ export interface Pedido {
   cotizacionDolar: string
   sku: string
   estado: EstadoPedido
+  observacion: string | null
+  metodoPago: MetodoPago
+  planPagoId: string | null
+  planPago: PlanPago | null
+  permutaModelo: string | null
+  permutaBateria: number | null
+  permutaValorUsd: string | null
   creadoEn: string
   actualizadoEn: string
   vendedorId: string
