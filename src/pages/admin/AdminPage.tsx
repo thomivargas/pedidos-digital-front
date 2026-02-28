@@ -1,10 +1,12 @@
 import { Card, CardContent } from '@/components/ui/card'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
-import { PackageCheck, Users, MapPin } from 'lucide-react'
+import { PackageCheck, Users, MapPin, Smartphone, CreditCard } from 'lucide-react'
 
 import { PedidosTab } from './tabs/PedidosTab'
 import { VendedoresTab } from './tabs/VendedoresTab'
 import { SucursalesTab } from './tabs/SucursalesTab'
+import { PermutasTab } from './tabs/PermutasTab'
+import { PlanesPagoTab } from './tabs/PlanesPagoTab'
 
 export function AdminPage() {
   return (
@@ -28,6 +30,14 @@ export function AdminPage() {
             <MapPin className="h-4 w-4" />
             Sucursales
           </TabsTrigger>
+          <TabsTrigger value="permutas" className="gap-2">
+            <Smartphone className="h-4 w-4" />
+            Permutas
+          </TabsTrigger>
+          <TabsTrigger value="planes-pago" className="gap-2">
+            <CreditCard className="h-4 w-4" />
+            Planes de Pago
+          </TabsTrigger>
         </TabsList>
 
         <TabsContent value="pedidos">
@@ -50,6 +60,22 @@ export function AdminPage() {
           <Card className="border-none shadow-none bg-transparent p-0">
             <CardContent className="px-0">
               <SucursalesTab />
+            </CardContent>
+          </Card>
+        </TabsContent>
+
+        <TabsContent value="permutas">
+          <Card className="border-none shadow-none bg-transparent p-0">
+            <CardContent className="px-0">
+              <PermutasTab />
+            </CardContent>
+          </Card>
+        </TabsContent>
+
+        <TabsContent value="planes-pago">
+          <Card className="border-none shadow-none bg-transparent p-0">
+            <CardContent className="px-0">
+              <PlanesPagoTab />
             </CardContent>
           </Card>
         </TabsContent>

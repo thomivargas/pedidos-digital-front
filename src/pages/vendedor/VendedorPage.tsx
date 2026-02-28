@@ -21,7 +21,7 @@ import {
 } from '@/components/ui/table'
 import { Plus, SendHorizontal, ClipboardList, PackageCheck } from 'lucide-react'
 
-const LIMIT = 10
+const LIMIT = 8
 
 export function VendedorPage() {
   const { user } = useAuth()
@@ -118,6 +118,9 @@ export function VendedorPage() {
               <TableHead className="hidden w-32 whitespace-nowrap text-right lg:table-cell text-table-header-text text-xs font-semibold uppercase tracking-wider p-3.5">
                 Cotización
               </TableHead>
+              <TableHead className="hidden w-32 whitespace-nowrap lg:table-cell text-table-header-text text-xs font-semibold uppercase tracking-wider p-3.5">
+                Pago
+              </TableHead>
               <TableHead className="w-32 whitespace-nowrap text-table-header-text text-xs font-semibold uppercase tracking-wider p-3.5">
                 Estado
               </TableHead>
@@ -133,7 +136,7 @@ export function VendedorPage() {
             {isLoading ? (
               Array.from({ length: 5 }).map((_, i) => (
                 <TableRow key={i} className="border-b border-border/50">
-                  {Array.from({ length: 7 }).map((__, j) => (
+                  {Array.from({ length: 8 }).map((__, j) => (
                     <TableCell key={j} className="py-4 px-5">
                       <Skeleton className="h-4 w-full rounded-md" />
                     </TableCell>
@@ -142,7 +145,7 @@ export function VendedorPage() {
               ))
             ) : pedidos.length === 0 ? (
               <TableRow>
-                <TableCell colSpan={7} className="py-20 text-center text-muted-foreground text-sm">
+                <TableCell colSpan={8} className="py-20 text-center text-muted-foreground text-sm">
                   No tenés pedidos todavía. ¡Creá tu primero!
                 </TableCell>
               </TableRow>
@@ -167,6 +170,18 @@ export function VendedorPage() {
                   </TableCell>
                   <TableCell className="hidden whitespace-nowrap p-3.5 text-right tabular-nums lg:table-cell">
                     ${Number(pedido.cotizacionDolar).toLocaleString('es-AR', { minimumFractionDigits: 2 })}
+                  </TableCell>
+                  <TableCell className="hidden whitespace-nowrap p-3.5 lg:table-cell">
+                    <span className="text-xs">
+                      {pedido.metodoPago === 'TARJETA' && pedido.planPago
+                        ? `${pedido.planPago.marca} ${pedido.planPago.cuotas}c`
+                        : pedido.metodoPago === 'TRANSFERENCIA'
+                          ? 'Transf.'
+                          : 'Efectivo'}
+                    </span>
+                    {pedido.permutaModelo && (
+                      <span className="ml-1 text-xs text-muted-foreground">+ Permuta</span>
+                    )}
                   </TableCell>
                   <TableCell className="whitespace-nowrap p-3.5">
                     <EstadoBadge estado={pedido.estado} />

@@ -25,7 +25,7 @@ import {
   SelectValue,
 } from '@/components/ui/select'
 
-const LIMIT = 10
+const LIMIT = 8
 const ALL = 'all'
 const NONE = 'none'
 

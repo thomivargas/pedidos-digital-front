@@ -1,11 +1,17 @@
 import { apiClient } from './client'
-import type { Pedido, PaginatedResponse } from '@/types'
+import type { Pedido, PaginatedResponse, MetodoPago } from '@/types'
 
 export interface CrearPedidoDto {
   nombreProducto: string
   precio: number
   cotizacionDolar: number
   sku: string
+  observacion?: string
+  metodoPago: MetodoPago
+  planPagoId?: string
+  permutaModelo?: string
+  permutaBateria?: number
+  permutaValorUsd?: number
 }
 
 interface ListarPedidosResponse extends PaginatedResponse<Pedido> {}
